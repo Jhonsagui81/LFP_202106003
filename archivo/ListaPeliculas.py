@@ -1,4 +1,5 @@
 from Pelicula import NodoPelicula
+from colorama import Fore
 
 class ListaPeliculas:
     def __init__(self):
@@ -6,9 +7,11 @@ class ListaPeliculas:
         self.Final = None 
         self.Limite = 0
     
+    def ContarNodos(self):
+        return self.Limite
+    
     def IncertarPelicula(self, nombre, actores, anio, genero):
         NuevoNodo = NodoPelicula(nombre, actores, anio, genero)
-        self.Limite += 1
         if self.Inicio == None:
             self.Inicio = NuevoNodo
             self.Final = NuevoNodo
@@ -26,6 +29,7 @@ class ListaPeliculas:
                     Actual = Actual.Siguiente 
             
             if bandera == False:
+                self.Limite += 1
                 self.Final.AsignarSiguiente(NuevoNodo)
                 self.Final = NuevoNodo 
 
@@ -54,29 +58,44 @@ class ListaPeliculas:
 
     def ImprimirInfoPelicula(self):
         if self.Inicio == None:
-            return """\n\tNo hay peliculas cargadas en el sistema
+            return Fore.RED+"""\n\tNo hay peliculas cargadas en el sistema
     Puede realizarlo en la opcion [1] del MENU PRINCIPAL"""
         c_pelicula = 0
         Retorno = ""
         Auxiliar = self.Inicio
         while Auxiliar != None:
             c_pelicula +=1
-            Retorno += "-->La pelicula ["+str(c_pelicula)+"] es "+str(Auxiliar.prittInforMenu2())
+            Retorno += "-->La pelicula ["+str(c_pelicula)+"] es "+str(Auxiliar.prittInforMenu2a())
             if Auxiliar.Siguiente != None:
                 Retorno += "\n"
             Auxiliar = Auxiliar.Siguiente
             Retorno += ""
         return Retorno
+    
+    def ImprimirActores(self, indice):
+        try:
+            posicion = int(indice)
+        except Exception as er:
+            text = Fore.RED+"\n\tOcurrio un error con la entrada, de tipo: "+str(er)
+            return text+Fore.RED+"\nAsegurate de leer el MANUAL DE USUARIO :)"
+
+        if self.Inicio == None:
+            return +Fore.RED+"\nNo se encuentra cargada ninguna pelicula!"
+        c_pelicula = 1
+        Retorno = ""
+        Auxiliar = self.Inicio
+        if posicion == 1 :
+            Retorno += "\nLa pelicula es protagonizada por: "+Fore.LIGHTMAGENTA_EX+str(Auxiliar.prittInfoMenu2b())
+            return Retorno
         
+        Auxiliar = Auxiliar.Siguiente
+        while Auxiliar != None:
+            c_pelicula += 1
+            if c_pelicula == posicion:
+                Retorno += "\nLa pelicula es protagonizada por: "+Fore.LIGHTMAGENTA_EX+str(Auxiliar.prittInfoMenu2b())
+                return Retorno
+            else:
+                Auxiliar = Auxiliar.Siguiente
+        else:
+            return Fore.RED+"\n\tEste indice no se encuentra almacenado :("
 
-
-
-        # Retorno = "La pelicula ["+str(self.Limite)+"] es "
-        # if self.Inicio == None:
-        #     return """\n\tNo hay peliculas cargadas en el sistema
-        #     Puede realizarlo en la opcion [1] del MENU PRINCIPAL"""
-        # Auxiliar = self.Inicio
-        # while Auxiliar != None:
-        #     Retorno += str(Auxiliar.prittInforMenu2)
-        #     if Auxiliar.Siguiente != None:
-        #         Retorno +=

@@ -28,5 +28,12 @@ class NodoPelicula:
     def ObtenerGenero(self):
         return self.Dato.genero
     
-    def prittInforMenu2(self):
+    def prittInforMenu2a(self):
         return str(self.Dato.nombre)+ " - Fue estrenada en "+str(self.Dato.anio)+" - Se categorizo como: "+str(self.Dato.genero)
+
+    def prittInfoMenu2b(self):
+        acrto1 = ""
+        for i in self.Dato.actores:
+            acrto1 += " - "+i
+        return str(acrto1)
+    

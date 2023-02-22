@@ -48,10 +48,10 @@ def CargaDeArchivo():
             #Rellenando la lista 
             mi_peliculas.IncertarPelicula(name, actor, lansamiento,categoria)
     except Exception as err:
-        print("\n\tOcurrio un error con la carga del archivo :|")
-        print("\tIntentalo de nuevo\n")
+        print(Fore.RED+"\n\tOcurrio un error con la carga del archivo :| del tipo: "+str(err))
+        print(Fore.RED+"\tIntentalo de nuevo\n")
     else:
-        print("\n\tEl archivo se cargo exitosamente :) ")
+        print(Fore.GREEN+"\n\tEl archivo se cargo exitosamente :) ")
 
 while True:
     try:
@@ -83,23 +83,35 @@ while True:
 
             if menu_principal == 2:     #Opcion 2 del menu principal
                 while True:
-                    print(Fore.GREEN +"\n\nUsted se encuentra en la opcion 2")
-                    print(Fore.GREEN +"----------------------------------------------------")
-                    print(Fore.GREEN +"|              ¿Que desea realizar?                |")
-                    print(Fore.GREEN +"|                                                  |")
-                    print(Fore.GREEN +"|    [a]. Ver las peliculas registrada             |")
-                    print(Fore.GREEN +"|    [b]. Ver los actores de las peliculas         |")
-                    print(Fore.GREEN +"|    [c]. Salir de este sub-menu                   |")
-                    print(Fore.GREEN +"|                                                  |")
-                    print(Fore.GREEN +"----------------------------------------------------")
-                    menu_2 = input(Fore.GREEN +"Ingrese una opcion:  ")
+                    print(Fore.CYAN +"\n\nUsted se encuentra en la opcion 2")
+                    print(Fore.CYAN +"----------------------------------------------------")
+                    print(Fore.CYAN +"|              ¿Que desea realizar?                |")
+                    print(Fore.CYAN +"|                                                  |")
+                    print(Fore.CYAN +"|    [a]. Ver las peliculas registrada             |")
+                    print(Fore.CYAN +"|    [b]. Ver los actores de las peliculas         |")
+                    print(Fore.CYAN +"|    [c]. Salir de este sub-menu                   |")
+                    print(Fore.CYAN +"|                                                  |")
+                    print(Fore.CYAN +"----------------------------------------------------")
+                    menu_2 = input(Fore.CYAN+"Ingrese una opcion:  ")
 
                     if menu_2 == "a":       #Opcion 1 del sebmenu2
-                        print("selecciono la primera opcion\n")
-                        print(Fore.YELLOW+ mi_peliculas.ImprimirInfoPelicula())
+                        bandera = mi_peliculas.ContarNodos()
+                        if bandera != 0:
+                            print("selecciono la primera opcion\n")
+                            print(Fore.YELLOW+ mi_peliculas.ImprimirInfoPelicula()) ##funcion imprimir peliculas 
+                        else: 
+                            print(mi_peliculas.ImprimirInfoPelicula())
 
                     if menu_2 == "b":       #Opcion 2 del sebmenu2
-                        print("selecciono la segunda opcion")
+                        print("selecciono la segunda opcion\n")
+
+                        bandera = mi_peliculas.ContarNodos()
+                        if bandera != 0:
+                            print(Fore.YELLOW+ mi_peliculas.ImprimirInfoPelicula())
+                            indice_Pelicula = input(Fore.YELLOW+"Ingrese el numero de la pelicula de la que desea conocer sus actores: ")
+                            print(mi_peliculas.ImprimirActores(indice_Pelicula))
+                        else:
+                            print(mi_peliculas.ImprimirInfoPelicula())
                     
                     if menu_2 == "c":       #Opcion 3 del sebmenu2
                         print("Nos vemos en el menu principal :)") 
@@ -138,8 +150,8 @@ while True:
             if menu_principal == 5:        #if que simula el do-while
                 print("Fin del programa ;(")
                 break
-    except:
-        print("\n\nSe acaba de producir un error :( ")
-        print("Asegurate de leer el MANUAL DE USUARIO")
+    except Exception as err:
+        print(Fore.RED+"\n\tSe acaba de producir un error :( " + str(err))
+        print(Fore.RED+"\tAsegurate de leer el MANUAL DE USUARIO")
     else:
         break
