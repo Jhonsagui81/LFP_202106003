@@ -52,3 +52,31 @@ class ListaPeliculas:
         Retorno += " ]"
         return Retorno
 
+    def ImprimirInfoPelicula(self):
+        if self.Inicio == None:
+            return """\n\tNo hay peliculas cargadas en el sistema
+    Puede realizarlo en la opcion [1] del MENU PRINCIPAL"""
+        c_pelicula = 0
+        Retorno = ""
+        Auxiliar = self.Inicio
+        while Auxiliar != None:
+            c_pelicula +=1
+            Retorno += "-->La pelicula ["+str(c_pelicula)+"] es "+str(Auxiliar.prittInforMenu2())
+            if Auxiliar.Siguiente != None:
+                Retorno += "\n"
+            Auxiliar = Auxiliar.Siguiente
+            Retorno += ""
+        return Retorno
+        
+
+
+
+        # Retorno = "La pelicula ["+str(self.Limite)+"] es "
+        # if self.Inicio == None:
+        #     return """\n\tNo hay peliculas cargadas en el sistema
+        #     Puede realizarlo en la opcion [1] del MENU PRINCIPAL"""
+        # Auxiliar = self.Inicio
+        # while Auxiliar != None:
+        #     Retorno += str(Auxiliar.prittInforMenu2)
+        #     if Auxiliar.Siguiente != None:
+        #         Retorno +=
