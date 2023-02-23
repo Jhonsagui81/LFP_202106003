@@ -91,15 +91,15 @@ class ListaPeliculas:
             text = Fore.RED+"\n\tNo puedes ingresar numeros aqui"
             return text + Fore.RED+"\n\tAsegurate de leer el MANUAL DE USUARIO :("
         #Fuera de las exepciones viene lo bueno xd
-        Retorno = "El actor "+item1+" Participa en: "
+        Retorno = "\nEl actor "+item1+" Participa en: \n"
         Auxiliar = self.Inicio
         if item1 == Auxiliar.BuscarActor(item1):
-            Retorno += Fore.LIGHTMAGENTA_EX+str(Auxiliar.ObtenerPelicula())+" - "
+            Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
 
         Auxiliar = Auxiliar.Siguiente
         while Auxiliar != None:
             if item1 == Auxiliar.BuscarActor(item1):
-                Retorno += Fore.LIGHTMAGENTA_EX+str(Auxiliar.ObtenerPelicula())+" - "
+                Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
             
             Auxiliar = Auxiliar.Siguiente
         return Retorno
@@ -122,5 +122,27 @@ class ListaPeliculas:
         while Auxiliar != None:
             if anio == Auxiliar.ObtenerAnio():
                 Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+", Genero: "+str(Auxiliar.ObtenerGenero())+"\n"
+            Auxiliar = Auxiliar.Siguiente
+        return Retorno
+    
+    ##Realiza una busqueda por genero y devuelve las peliculas con ese genero 
+    def FiltroGenero(self, genero):
+        genero1 = genero.strip()
+        try:
+            actor = int(genero)
+        except Exception as err:
+            print("")
+        else:
+            text = Fore.RED+"\n\tNo puedes ingresar numeros aqui"
+            return text + Fore.RED+"\n\tAsegurate de leer el MANUAL DE USUARIO :("
+        Retorno = "\nLas peliculas de "+str(genero1)+" registradas son: \n"
+        Auxiliar = self.Inicio
+        if genero1 == Auxiliar.ObtenerGenero():
+            Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
+        
+        Auxiliar = Auxiliar.Siguiente
+        while Auxiliar != None:
+            if genero1 == Auxiliar.ObtenerGenero():
+                Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
             Auxiliar = Auxiliar.Siguiente
         return Retorno

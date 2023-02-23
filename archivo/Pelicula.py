@@ -27,7 +27,8 @@ class NodoPelicula:
         return lanza
     
     def ObtenerGenero(self):
-        return self.Dato.genero
+        gene = self.Dato.genero.strip()
+        return gene
     
     def prittInforMenu2a(self):
         return str(self.Dato.nombre)+ " - Fue estrenada en "+str(self.Dato.anio)+" - Se categorizo como: "+str(self.Dato.genero)

@@ -151,7 +151,13 @@ while True:
                             print(mi_peliculas.ImprimirInfoPelicula()) #para que salte el error cuando no hay nodos
 
                     if menu_3 == "c":       #Opcion 3 del sebmenu3
-                        print("Usted selecciono la tercer opcion")
+                        print("\nUsted desea filtrar por el Genero de la pelicula")
+                        bandera = mi_peliculas.ContarNodos()
+                        if bandera != 0:
+                            genero = input(Fore.CYAN+"Ingrese el Genero que desea Buscar: ")
+                            print(mi_peliculas.FiltroGenero(genero))
+                        else:
+                            print(mi_peliculas.ImprimirInfoPelicula())
                     
                     if menu_3 == "d":       #Opcion 4 del sebmenu3
                         print("NOs vemos en el menuPrincipal :)")
