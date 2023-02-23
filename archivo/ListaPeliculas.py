@@ -7,9 +7,11 @@ class ListaPeliculas:
         self.Final = None 
         self.Limite = 0
     
+    #Verifica cuantos nodos hay en la lista
     def ContarNodos(self):
         return self.Limite
     
+    #Valida e inserta Nuevos nodos
     def IncertarPelicula(self, nombre, actores, anio, genero):
         NuevoNodo = NodoPelicula(nombre, actores, anio, genero)
         if self.Inicio == None:
@@ -33,29 +35,7 @@ class ListaPeliculas:
                 self.Final.AsignarSiguiente(NuevoNodo)
                 self.Final = NuevoNodo 
 
-    def insertar(self, nombre, actores, anio, genero):
-        NuevoNodo = NodoPelicula(nombre, actores, anio, genero)
-        self.Limite += 1
-        if self.Inicio == None:
-            self.Inicio = NuevoNodo
-            self.Final = NuevoNodo
-        else:
-            self.Final.AsignarSiguiente(NuevoNodo)
-            self.Final = NuevoNodo
-    
-    def Imprimir(self):
-        Retorno = "La lista tiene:["
-        if self.Inicio == None:
-            return "La lista esta vacia. "
-        Auxiliar = self.Inicio
-        while Auxiliar != None:
-            Retorno += str(Auxiliar.pritt())
-            if Auxiliar.Siguiente != None:
-                Retorno += ", "
-            Auxiliar = Auxiliar.Siguiente
-        Retorno += " ]"
-        return Retorno
-
+    ##Devuelve una cadena con la informacion de las peliculas
     def ImprimirInfoPelicula(self):
         if self.Inicio == None:
             return Fore.RED+"""\n\tNo hay peliculas cargadas en el sistema
@@ -72,6 +52,7 @@ class ListaPeliculas:
             Retorno += ""
         return Retorno
     
+    ##Devuelve una cadena con los actores de cierta pelicula 
     def ImprimirActores(self, indice):
         try:
             posicion = int(indice)
@@ -99,3 +80,28 @@ class ListaPeliculas:
         else:
             return Fore.RED+"\n\tEste indice no se encuentra almacenado :("
 
+    ##Realiza una busqueda por actor que se haya pasado como parametro
+    def FiltroActor(self, item):
+        item1 = item.strip()
+        try:
+            actor = int(item)
+        except Exception as err:
+            print("")
+        else:
+            text = Fore.RED+"\n\tNo puedes ingresar numeros aqui"
+            return text + Fore.RED+"\n\tAsegurate de leer el MANUAL DE USUARIO :("
+        if self.Inicio == None:
+            return +Fore.RED+"\nNo se encuentra cargada ninguna pelicula!"
+        Retorno = "El actor "+item1+" Participa en: "
+        Auxiliar = self.Inicio
+        if item1 == Auxiliar.BuscarActor(item1):
+            Retorno += Fore.LIGHTMAGENTA_EX+str(Auxiliar.ObtenerPelicula())+" - "
+        
+        Auxiliar = Auxiliar.Siguiente
+        while Auxiliar != None:
+            if item1 == Auxiliar.BuscarActor(item1):
+                Retorno += Fore.LIGHTMAGENTA_EX+str(Auxiliar.ObtenerPelicula())+" - "
+            
+            Auxiliar = Auxiliar.Siguiente
+        return Retorno
+            

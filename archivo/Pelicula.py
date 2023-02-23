@@ -37,3 +37,8 @@ class NodoPelicula:
             acrto1 += " - "+i
         return str(acrto1)
     
+    def BuscarActor(self, name):
+        for i in self.Dato.actores:
+            sin_espacion = i.strip()
+            if name == sin_espacion:
+                return str(sin_espacion)

@@ -114,25 +114,34 @@ while True:
                             print(mi_peliculas.ImprimirInfoPelicula())
                     
                     if menu_2 == "c":       #Opcion 3 del sebmenu2
-                        print("Nos vemos en el menu principal :)") 
+                        print(Fore.RED+"Nos vemos en el menu principal :)") 
                         break 
 
             if menu_principal == 3:     #Opcion tres del menu Principal
                 while True:
-                    print("\n\nUsted se encuentra en la opcion 3")
-                    print("----------------------------------------------------")
-                    print("|              ¿Que desea realizar?                |")
-                    print("|                                                  |")
-                    print("|    [a]. Filtrar por actor                        |")
-                    print("|    [b]. Filtrar por año de estreno               |")
-                    print("|    [c]. Filtrar por genero                       |")
-                    print("|    [d]. Salir de este sub-menu                   |")
-                    print("|                                                  |")
-                    print("----------------------------------------------------")
-                    menu_3 = input("Ingrese una opcion:  ")
+                    print(Fore.CYAN +"\n\nUsted se encuentra en la opcion 3")
+                    print(Fore.CYAN +"----------------------------------------------------")
+                    print(Fore.CYAN +"|              ¿Que desea realizar?                |")
+                    print(Fore.CYAN +"|                                                  |")
+                    print(Fore.CYAN +"|    [a]. Filtrar por actor                        |")
+                    print(Fore.CYAN +"|    [b]. Filtrar por año de estreno               |")
+                    print(Fore.CYAN +"|    [c]. Filtrar por genero                       |")
+                    print(Fore.CYAN +"|    [d]. Salir de este sub-menu                   |")
+                    print(Fore.CYAN +"|                                                  |")
+                    print(Fore.CYAN +"----------------------------------------------------")
+                    menu_3 = input(Fore.CYAN +"Ingrese una opcion:  ")
 
                     if menu_3 == "a":       #Opcion 1 del sebmenu3
-                        print("Usted selecciono la primer opcion")
+                        print(Fore.CYAN +"Usted Desea filtrar las peliculas por su actor")
+                        bandera = mi_peliculas.ContarNodos()
+                        if bandera != 0:
+                            item = input(Fore.CYAN + "Ingrese el nombre del actor: ")
+                            print(mi_peliculas.FiltroActor(item))
+                            ##Pendiente
+                        else:
+                            print(mi_peliculas.ImprimirInfoPelicula())
+
+
 
                     if menu_3 == "b":       #Opcion 2 del sebmenu3
                         print("Ustede selecciono la segunda opcion")
