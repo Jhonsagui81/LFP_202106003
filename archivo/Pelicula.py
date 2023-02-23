@@ -23,7 +23,8 @@ class NodoPelicula:
         return self.Dato.actores
 
     def ObtenerAnio(self):
-        return self.Dato.anio
+        lanza = self.Dato.anio.strip()
+        return lanza
     
     def ObtenerGenero(self):
         return self.Dato.genero

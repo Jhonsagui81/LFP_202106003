@@ -132,19 +132,23 @@ while True:
                     menu_3 = input(Fore.CYAN +"Ingrese una opcion:  ")
 
                     if menu_3 == "a":       #Opcion 1 del sebmenu3
-                        print(Fore.CYAN +"Usted Desea filtrar las peliculas por su actor")
+
+                        print(Fore.CYAN +"\nUsted desea filtrar las peliculas por su actor")
                         bandera = mi_peliculas.ContarNodos()
                         if bandera != 0:
                             item = input(Fore.CYAN + "Ingrese el nombre del actor: ")
                             print(mi_peliculas.FiltroActor(item))
-                            ##Pendiente
                         else:
                             print(mi_peliculas.ImprimirInfoPelicula())
 
-
-
                     if menu_3 == "b":       #Opcion 2 del sebmenu3
-                        print("Ustede selecciono la segunda opcion")
+                        print(Fore.CYAN +"\nUsted desea filtrar por el año de lanzamiento")
+                        bandera = mi_peliculas.ContarNodos()
+                        if bandera != 0:
+                            anio = input(Fore.CYAN + "Ingrese el año de lanzamiento: ")
+                            print(mi_peliculas.FiltroAnio(anio))
+                        else:
+                            print(mi_peliculas.ImprimirInfoPelicula()) #para que salte el error cuando no hay nodos
 
                     if menu_3 == "c":       #Opcion 3 del sebmenu3
                         print("Usted selecciono la tercer opcion")
