@@ -26,7 +26,7 @@ class ListaPeliculas:
             while Actual != None:
                 numero += 1
                 if NuevoNodo.ObtenerPelicula() == Actual.ObtenerPelicula():
-                    print(str("\tLa pelicula "+str(numero)+" se encuentra repetida"))
+                    print(Fore.RED+str("\tLa pelicula "+str(numero)+" se encuentra repetida"))
                     bandera = True
                     Actual = Actual.Siguiente
                 else:
@@ -54,6 +54,21 @@ class ListaPeliculas:
             Retorno += ""
         return Retorno
     
+    def ImprimirPelicula(self):
+        if self.Inicio == None:
+            return Fore.RED+"""\n\tNo hay peliculas cargadas en el sistema
+    Puede realizarlo en la opcion [1] del MENU PRINCIPAL"""
+        c_pelicula = 0
+        Retorno = ""
+        Auxiliar = self.Inicio
+        while Auxiliar != None:
+            c_pelicula +=1
+            Retorno += "-->La pelicula ["+str(c_pelicula)+"] es "+str(Auxiliar.ObtenerPelicula())
+            if Auxiliar.Siguiente != None:
+                Retorno += "\n"
+            Auxiliar = Auxiliar.Siguiente
+            Retorno += ""
+        return Retorno
     ##Devuelve una cadena con los actores de cierta pelicula 
     def ImprimirActores(self, indice):
         try:
@@ -93,7 +108,7 @@ class ListaPeliculas:
             text = Fore.RED+"\n\tNo puedes ingresar numeros aqui"
             return text + Fore.RED+"\n\tAsegurate de leer el MANUAL DE USUARIO :("
         #Fuera de las exepciones viene lo bueno xd
-        Retorno = "\nEl actor "+item1+" Participa en: \n"
+        Retorno = "El actor "+Fore.LIGHTGREEN_EX+str(item1)+Fore.LIGHTMAGENTA_EX+" Participa en: \n"
         Auxiliar = self.Inicio
         if item1 == Auxiliar.BuscarActor(item1):
             Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+"\n"
@@ -115,7 +130,7 @@ class ListaPeliculas:
             text = Fore.RED+"\n\tNo puedes ingresar caracteres aqui"
             return text+Fore.RED+"\n\tAsegurate de leer el MANUAL DE USUARIO :)"
         #Fuera de excepcion biene filtro
-        Retorno = "\nLas peliculas lanzadas en "+str(anio)+" fueron: \n"
+        Retorno = "\nLas peliculas lanzadas en "+Fore.LIGHTGREEN_EX+str(anio)+Fore.LIGHTMAGENTA_EX+" fueron: \n"
         Auxiliar = self.Inicio
         if anio == Auxiliar.ObtenerAnio():
             Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+", Genero: "+str(Auxiliar.ObtenerGenero())+"\n"
@@ -137,7 +152,7 @@ class ListaPeliculas:
         else:
             text = Fore.RED+"\n\tNo puedes ingresar numeros aqui"
             return text + Fore.RED+"\n\tAsegurate de leer el MANUAL DE USUARIO :("
-        Retorno = "\nLas peliculas de "+str(genero1)+" registradas son: \n"
+        Retorno = "\nLas peliculas de "+Fore.LIGHTGREEN_EX+str(genero1)+Fore.LIGHTMAGENTA_EX+" registradas son: \n"
         Auxiliar = self.Inicio
         if genero1 == Auxiliar.ObtenerGenero():
             Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+"\n"
