@@ -1,11 +1,12 @@
 from Pelicula import NodoPelicula
+import graphviz
 from colorama import Fore
 
 class ListaPeliculas:
     def __init__(self):
         self.Inicio = None
         self.Final = None 
-        self.Limite = 0
+        self.Limite = 1
     
     #Verifica cuantos nodos hay en la lista
     def ContarNodos(self):
@@ -13,10 +14,11 @@ class ListaPeliculas:
     
     #Valida e inserta Nuevos nodos
     def IncertarPelicula(self, nombre, actores, anio, genero):
-        NuevoNodo = NodoPelicula(nombre, actores, anio, genero)
+        NuevoNodo = NodoPelicula(self.Limite, nombre, actores, anio, genero)
         if self.Inicio == None:
             self.Inicio = NuevoNodo
             self.Final = NuevoNodo
+            self.Limite +=1
         else: #and self.Inicio.Siguiente != None
             numero = 0
             Actual = self.Inicio
@@ -94,12 +96,12 @@ class ListaPeliculas:
         Retorno = "\nEl actor "+item1+" Participa en: \n"
         Auxiliar = self.Inicio
         if item1 == Auxiliar.BuscarActor(item1):
-            Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
+            Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+"\n"
 
         Auxiliar = Auxiliar.Siguiente
         while Auxiliar != None:
             if item1 == Auxiliar.BuscarActor(item1):
-                Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
+                Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+"\n"
             
             Auxiliar = Auxiliar.Siguiente
         return Retorno
@@ -138,11 +140,63 @@ class ListaPeliculas:
         Retorno = "\nLas peliculas de "+str(genero1)+" registradas son: \n"
         Auxiliar = self.Inicio
         if genero1 == Auxiliar.ObtenerGenero():
-            Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
+            Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+"\n"
         
         Auxiliar = Auxiliar.Siguiente
         while Auxiliar != None:
             if genero1 == Auxiliar.ObtenerGenero():
-                Retorno += Fore.LIGHTMAGENTA_EX+"-->"+str(Auxiliar.ObtenerPelicula())+"\n"
+                Retorno += Fore.LIGHTMAGENTA_EX+"--> "+str(Auxiliar.ObtenerPelicula())+"\n"
             Auxiliar = Auxiliar.Siguiente
         return Retorno
+    
+    def GraficaRelacion(self):
+        #Para recoger todo los autores en las peliculas
+        total_actores = []
+        Auxiliar = self.Inicio
+
+        #Obtener todos los actores
+        while Auxiliar != None:
+            temp_actores = Auxiliar.ObtenerActor()
+            for x in temp_actores:
+                total_actores.append(x)
+            Auxiliar = Auxiliar.Siguiente
+
+        #Eliminando los actores repetidos
+        for act in total_actores:
+            while(total_actores.count(act) > 1):
+                total_actores.remove(act)
+
+        ##Para graficar los ACTORES Y RESISTENCIAS
+        imgRelacion = graphviz.Digraph('Relacion', filename="ImagenRelacion")
+        imgRelacion.attr(rankdir="LR")
+        Auxiliar = self.Inicio
+        #para generar los actores
+        for actor in total_actores:
+            imgRelacion.node(str(actor), f'''<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6">
+                <TR>
+                    <TD COLSPAN="2"><FONT COLOR="red">{str(actor)}</FONT></TD>
+                </TR>
+            </TABLE>>''', shape="none")
+
+        #Para generar todas las peliculas    
+        while Auxiliar != None:
+            imgRelacion.node(str(Auxiliar.ObtenerId()), f'''<
+            <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+                <TR>
+                    <TD COLSPAN="2"><FONT COLOR="red">{str(Auxiliar.ObtenerPelicula())}</FONT></TD>
+                </TR>
+                <TR>
+                    <TD><FONT COLOR="red">{Auxiliar.ObtenerAnio()}</FONT></TD>
+                    <TD><FONT COLOR="red">{Auxiliar.ObtenerGenero()}</FONT></TD>
+                </TR>
+            </TABLE>>''', shape="none")
+
+            for conexion in total_actores:
+                if conexion == Auxiliar.BuscarActor(conexion):
+                    imgRelacion.edge(str(Auxiliar.ObtenerId()), str(conexion) )
+            
+
+            Auxiliar = Auxiliar.Siguiente
+        
+        imgRelacion.view()

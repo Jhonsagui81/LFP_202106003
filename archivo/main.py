@@ -46,7 +46,7 @@ def CargaDeArchivo():
             categoria = lectura[3]
         
             #Rellenando la lista 
-            mi_peliculas.IncertarPelicula(name, actor, lansamiento,categoria)
+            mi_peliculas.IncertarPelicula(str(name.strip()), actor, str(lansamiento.strip()),str(categoria.strip()))
     except Exception as err:
         print(Fore.RED+"\n\tOcurrio un error con la carga del archivo :| del tipo: "+str(err))
         print(Fore.RED+"\tIntentalo de nuevo\n")
@@ -160,14 +160,15 @@ while True:
                             print(mi_peliculas.ImprimirInfoPelicula())
                     
                     if menu_3 == "d":       #Opcion 4 del sebmenu3
-                        print("NOs vemos en el menuPrincipal :)")
+                        print(Fore.RED+"NOs vemos en el menuPrincipal :)")
                         break
                     
             if menu_principal == 4:     #Opcion 4 del menu princiapal
-                print("Usted se encuentra en la opcion 4")    
+                print(Fore.CYAN+"Usted se encuentra en la opcion 4")   
+                mi_peliculas.GraficaRelacion()
 
             if menu_principal == 5:        #if que simula el do-while
-                print("Fin del programa ;(")
+                print(Fore.RED+"Fin del programa ;(")
                 break
     except Exception as err:
         print(Fore.RED+"\n\tSe acaba de producir un error :( " + str(err))

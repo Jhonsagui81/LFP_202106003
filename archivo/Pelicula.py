@@ -1,15 +1,19 @@
 class Pelicula:
-    def __init__(self, nombre, actores, anio, genero):
+    def __init__(self, id, nombre, actores, anio, genero):
+        self.id = id
         self.nombre = nombre
         self.actores = actores
         self.anio = anio
         self.genero = genero
 
 class NodoPelicula:
-    def __init__(self, nombre, actores, anio, genero):
-        self.Dato = Pelicula(nombre, actores, anio, genero)
+    def __init__(self, id, nombre, actores, anio, genero):
+        self.Dato = Pelicula(id,nombre, actores, anio, genero)
         self.Siguiente = None
-
+        
+    def ObtenerId(self):
+        return self.Dato.id
+    
     def ObtenerSiguiente(self):
         return self.Siguiente
     
@@ -20,7 +24,10 @@ class NodoPelicula:
         return self.Dato.nombre
     
     def ObtenerActor(self):
-        return self.Dato.actores
+        actores = []
+        for x in self.Dato.actores:
+            actores.append(x.strip())
+        return actores
 
     def ObtenerAnio(self):
         lanza = self.Dato.anio.strip()
@@ -44,3 +51,9 @@ class NodoPelicula:
             sin_espacion = i.strip()
             if name == sin_espacion:
                 return str(sin_espacion)
+    
+    def prueba(self, name):
+        for i in self.Dato.actores:
+            sin_espacion = i.strip()
+            if name == sin_espacion:
+                return sin_espacion
