@@ -190,22 +190,22 @@ class ListaPeliculas:
             imgRelacion.node(str(actor), f'''<
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6">
                 <TR>
-                    <TD COLSPAN="2"><FONT COLOR="red">{str(actor)}</FONT></TD>
+                    <TD COLSPAN="2"><FONT COLOR="black">{str(actor)}</FONT></TD>
                 </TR>
-            </TABLE>>''', shape="none")
+            </TABLE>>''', shape="none", fillcolor="#33ceff", style = "filled")
 
         #Para generar todas las peliculas    
         while Auxiliar != None:
             imgRelacion.node(str(Auxiliar.ObtenerId()), f'''<
             <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
                 <TR>
-                    <TD COLSPAN="2"><FONT COLOR="red">{str(Auxiliar.ObtenerPelicula())}</FONT></TD>
+                    <TD COLSPAN="2"><FONT COLOR="green">{str(Auxiliar.ObtenerPelicula())}</FONT></TD>
                 </TR>
                 <TR>
-                    <TD><FONT COLOR="red">{Auxiliar.ObtenerAnio()}</FONT></TD>
-                    <TD><FONT COLOR="red">{Auxiliar.ObtenerGenero()}</FONT></TD>
+                    <TD><FONT COLOR="black">{Auxiliar.ObtenerAnio()}</FONT></TD>
+                    <TD><FONT COLOR="black">{Auxiliar.ObtenerGenero()}</FONT></TD>
                 </TR>
-            </TABLE>>''', shape="none")
+            </TABLE>>''', shape="box", fillcolor="#a52e0c", style = "")
 
             for conexion in total_actores:
                 if conexion == Auxiliar.BuscarActor(conexion):
